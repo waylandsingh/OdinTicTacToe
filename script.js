@@ -8,38 +8,27 @@ const gameBoard = (function gameBoard() {
     let opponentMark = 'O'
     const _checkwinner = ()=>{console.log('winner check!')}
     const _marksquare = ()=>{console.log(this)} // can't seem to get this to bind properly?
-    // initialize each square with a board-square using for loop
-        // attach the event listener for a click
+
+    // refactor opportunity: split into two modules, with the below as gameboard
+    // the containing as game-controller?
     const boardSquares = document.querySelectorAll(".board-square")
-    // for (let i=0; i < boardSquares.length; i++) {
-    //     boardSquares[i].addEventListener('click', () =>{
-    //         _marksquare.bind(boardSquares[i])
-    //     }, false)
-    // }
 
     boardSquares.forEach((sq) => {
-        console.log(typeof sq)
-        console.log(sq)
 
         sq.addEventListener('click', function clickedSquare() {
             // determine the calling square
             const squareID = parseInt(this.id.replace('bs',''))
+           
             // read state for turns
-            
             if (boardValues[squareID] == 0) { //square unmarked
-
                 this.innerHTML = playerOneTurn ? playerOneMark : opponentMark
                 boardValues[squareID] = this.innerHTML
-                playerOneTurn = !playerOneTurn
+                playerOneTurn = !playerOneTurn //turn passes to other player
+
             } else { //illegal move
                 alert('retry with a legal move!')
             }
-            console.log(boardValues[squareID])
-            //use id to determine which `boardValues` to mark, if legal
-            // ensure it is an unmarked square, then assign boardsquare for the current player
-            // change the turn to the other player
-
-            
+   
         }, false)
     })
     // console.log('ok')
@@ -56,7 +45,6 @@ const gameBoard = (function gameBoard() {
 )();
 
 
-// board-square Factory Function (will need 9x)
 
 // player Factory Function (need only 1)
 
