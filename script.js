@@ -22,7 +22,8 @@ const gameBoard = (function gameBoard() {
         ]
         winningIndices.forEach(ind=>{
             if(boardValues[ind[0]] == 'X' || boardValues[ind[0]] == 'O') {
-                if (boardValues[ind[0]] === boardValues [ind[1]] && boardValues[ind[0]] == boardValues[ind[2]]) {                    winnerFound = true
+                if (boardValues[ind[0]] === boardValues [ind[1]] && boardValues[ind[0]] == boardValues[ind[2]]) {
+                    winnerFound = true
                 }
             }
         })
