@@ -6,14 +6,16 @@ const gameBoard = (function gameBoard() {
     let playerOneTurn = true // default
     let playerOneMark = 'X'
     let opponentMark = 'O'
+    let winnerFound = false
+
     const _checkwinner = ()=>{
-        let winnerFound = false
+        
         // define a winning board
         // compare the winning board to the current boardvalues
         const winningIndices = [
             [0,1,2],
             [3,4,5],
-            [4,5,6],
+            [6,7,8],
             [0,3,6],
             [1,4,7],
             [2,5,8],
@@ -24,10 +26,15 @@ const gameBoard = (function gameBoard() {
             if(boardValues[ind[0]] == 'X' || boardValues[ind[0]] == 'O') {
                 if (boardValues[ind[0]] === boardValues [ind[1]] && boardValues[ind[0]] == boardValues[ind[2]]) {
                     winnerFound = true
+                    console.log(boardValues)
+                    console.log(ind)
                 }
             }
         })
-        console.log(`Winner Check: ${winnerFound?'winner found':'no winner!'}`)
+        if (winnerFound) {
+            console.log(`Winner Check: ${winnerFound ? 'winner found' : 'no winner!'}`)
+            alert(`${playerOneTurn ? 'Player Two' : 'Player One'} is the winner!`)
+        }
     }
 
     // test function for selecting the right scope
@@ -43,12 +50,14 @@ const gameBoard = (function gameBoard() {
             const squareID = parseInt(this.id.replace('bs',''))
            
             // read state for turns
-            if (boardValues[squareID] == 0) { //square unmarked
+            if (boardValues[squareID] == 0 && !winnerFound) { //square unmarked
                 this.innerHTML = playerOneTurn ? playerOneMark : opponentMark
                 boardValues[squareID] = this.innerHTML
                 playerOneTurn = !playerOneTurn //turn passes to other player
                 _checkwinner()
 
+            } else if(winnerFound){
+                alert('clear the current game to run it back!')
             } else { //illegal move
                 alert('retry with a legal move!')
             }
@@ -63,6 +72,7 @@ const gameBoard = (function gameBoard() {
             sq.innerHTML = ''
             
         })
+        winnerFound = false
     }
 
     return {boardValues, clearBoard}
@@ -87,7 +97,7 @@ const displayController = (() => {
     let playerOneName = 'Player 1'
     let playerTwoName = 'Player 2'
 
-    const renderGameboard = () => {
+    const _renderGameboard = () => {
         container.style.display = 'flex'
         introContainer.style.display = 'none'
         playerOneTitle.textContent = nameInputOne.value ? nameInputOne.value : playerOneName
@@ -95,19 +105,24 @@ const displayController = (() => {
     }
     
     // function that initates a game loop
-    pvpBegin.addEventListener('click', renderGameboard)
+    pvpBegin.addEventListener('click', _renderGameboard)
     
     // function to reset the board & legal moves
     const clearBoardButton = document.querySelector("#clear-board")
     clearBoardButton.addEventListener('click', gameBoard.clearBoard)
 
-    // reset the board state
-
+    // return to the inital menu
+    const _returnToOptions = () => {
+        gameBoard.clearBoard()
+        container.style.display = 'none'
+        introContainer.style.display = 'flex'
+    }
     const returnToOptions = document.querySelector("#return-options")
-    // add event listeners to buttons (options section, side selection)
+    returnToOptions.addEventListener('click', _returnToOptions)
 
 
-    return {renderGameboard}
+
+    return {}
 })(); 
 
 // displayController.renderGameboard()
