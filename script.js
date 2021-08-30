@@ -29,11 +29,11 @@ const gameBoard = (function gameBoard() {
         })
         console.log(`Winner Check: ${winnerFound?'winner found':'no winner!'}`)
     }
+
+    // test function for selecting the right scope
     const _marksquare = ()=>{console.log(this)} // can't seem to get this to bind properly?
     
-
-    // refactor opportunity: split into two modules, with the below as gameboard
-    // the containing as game-controller?
+    // squares and game logic
     const boardSquares = document.querySelectorAll(".board-square")
 
     boardSquares.forEach((sq) => {
@@ -56,9 +56,16 @@ const gameBoard = (function gameBoard() {
         }, false)
     })        
 
+    const clearBoard = () => {
+        boardValues = [0,0,0,0,0,0,0,0,0]
+        playerOneTurn = true; //reset the game state as well
+        boardSquares.forEach((sq) =>{
+            sq.innerHTML = ''
+            
+        })
+    }
 
-
-    return {boardValues, _checkwinner}
+    return {boardValues, clearBoard}
     }       
 )();
 
@@ -69,13 +76,39 @@ const gameBoard = (function gameBoard() {
 // winner display module (only need 1)
 const displayController = (() => {
     // define display functions (edit the css of elements to make them appear/disappear when buttons pushed)
+    const container = document.querySelector('#container')
+    const introContainer = document.querySelector('#intro-container')
+    const nameInputOne = document.querySelector("#player1-name")
+    const nameInputTwo = document.querySelector("#player2-name")
+    const playerOneTitle = document.querySelector("#player1-title")
+    const playerTwoTitle = document.querySelector("#player2-title")
 
+    const pvpBegin = document.querySelector("#pvp-begin")
+    let playerOneName = 'Player 1'
+    let playerTwoName = 'Player 2'
+
+    const renderGameboard = () => {
+        container.style.display = 'flex'
+        introContainer.style.display = 'none'
+        playerOneTitle.textContent = nameInputOne.value ? nameInputOne.value : playerOneName
+        playerTwoTitle.textContent = nameInputTwo.value ? nameInputTwo.value : playerTwoName
+    }
+    
+    // function that initates a game loop
+    pvpBegin.addEventListener('click', renderGameboard)
     
     // function to reset the board & legal moves
+    const clearBoardButton = document.querySelector("#clear-board")
+    clearBoardButton.addEventListener('click', gameBoard.clearBoard)
 
-    // function that initates a game loop
+    // reset the board state
 
+    const returnToOptions = document.querySelector("#return-options")
     // add event listeners to buttons (options section, side selection)
+
+
+    return {renderGameboard}
 })(); 
 
+// displayController.renderGameboard()
 console.log(gameBoard.boardSquares)

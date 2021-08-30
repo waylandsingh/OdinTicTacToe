@@ -9,14 +9,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="intro-container">
+        <form>
+            <label for="player1-name">Rename 1</label>
+            <input type="text" id="player1-name" name="player1-name" placeholder="player1">  
+            <br>
+            <label for="player2-name">Rename 2</label>
+            <input type="text" id="player2-name" name="player2-name" placeholder="player2">
+        </form>
+        <button id="pvp-begin">Player vs Player Start</button>
+    </div>
+
     <div id="container">
         <div id="winner-display">
             Winner stuff here!
         </div>
 
         <div id="gameplay-container">
-            <div id="human">
-                human stuff
+            <div id="player1-title">
+                
             </div>
             <div id="game-board">
                 <!-- hard code 3x3 tictactoe? or generate n dimensional tictactoe -->
@@ -30,13 +41,14 @@
                 <div class="board-square" id="bs7">.</div>
                 <div class="board-square" id="bs8">.</div>
             </div>
-            <div id="computer">
-                computer stuff
+            <div id="player2-title">
+                
             </div>
         </div>
 
         <div id="options">
-            options
+            <button id="clear-board">Clear Current Game</button>
+            <button id="return-options">Return to Options</button>
         </div>
 
     </div>
