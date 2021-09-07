@@ -7,6 +7,8 @@ const gameBoard = (function gameBoard() {
     let playerOneMark = 'X'
     let opponentMark = 'O'
     let winnerFound = false
+    const winnerDisplay = document.querySelector('#winner-display h1')
+    
 
     const _checkwinner = ()=>{
         
@@ -33,9 +35,10 @@ const gameBoard = (function gameBoard() {
         })
         if (winnerFound) {
             console.log(`Winner Check: ${winnerFound ? 'winner found' : 'no winner!'}`)
-            alert(`${playerOneTurn 
+            let winnerMSG = `${playerOneTurn 
                 ? displayController.playerTwoTitle.textContent 
-                : displayController.playerTwoTitle.textContent} is the winner!`)
+                : displayController.playerOneTitle.textContent}`
+            winnerDisplay.textContent = `King of the Ring: ${winnerMSG}`
         }
     }
 
