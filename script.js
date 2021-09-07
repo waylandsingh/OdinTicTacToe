@@ -33,7 +33,9 @@ const gameBoard = (function gameBoard() {
         })
         if (winnerFound) {
             console.log(`Winner Check: ${winnerFound ? 'winner found' : 'no winner!'}`)
-            alert(`${playerOneTurn ? 'Player Two' : 'Player One'} is the winner!`)
+            alert(`${playerOneTurn 
+                ? displayController.playerTwoTitle.textContent 
+                : displayController.playerTwoTitle.textContent} is the winner!`)
         }
     }
 
@@ -75,7 +77,7 @@ const gameBoard = (function gameBoard() {
         winnerFound = false
     }
 
-    return {boardValues, clearBoard}
+    return {boardValues, winnerFound, clearBoard}
     }       
 )();
 
@@ -122,8 +124,10 @@ const displayController = (() => {
 
 
 
-    return {}
+    return {playerOneTitle, playerTwoTitle}
 })(); 
 
 // displayController.renderGameboard()
 console.log(gameBoard.boardSquares)
+
+
