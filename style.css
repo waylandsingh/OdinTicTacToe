@@ -32,7 +32,9 @@ body {
 }
 
 #container {
-    background-color: aliceblue;
+    background:rgba(155, 229, 228, 0.9);
+    /* background-color: aliceblue 0.13; */
+    
     height: 600px;
     width: 600px;
     display: none;
@@ -49,7 +51,7 @@ body {
     display: flex;
     font-size: 1.25em;
     justify-content: center;
-    border: 1px red solid;
+    /* border: 1px red solid; */
 }
 
 #gameplay-container {
@@ -58,7 +60,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px black dotted;
+    /* border: 1px black dotted; */
 }
 
 #game-board {
@@ -86,4 +88,8 @@ body {
     justify-content: center;
     align-items: center;
 
+}
+
+#options {
+    margin-bottom: 4vh;
 }
